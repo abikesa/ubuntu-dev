@@ -90,6 +90,7 @@ graph TD
   A2[.yml → ⚙️ Anatomical] --> B2[Axonal]
   B2 --> C2[🛠 GitHub]
   C2 --> D2[👁 Observed]
+  click D2 href "https://www.gutenberg.org/files/1514/1514-h/1514-h.htm" _blank
   D2 --> E2[Cell Type]
   E2 --> F2[Tissue]
   F2 --> G2[Organ]
@@ -114,6 +115,7 @@ graph TD
   click B4 href "./neural.html" _blank
   B4 --> C4[🏢 Ukubona]
   C4 --> D4[🔤 Unambiguously]
+  click D4 call popup("For the eyes of the LORD run to and fro throughout the whole earth, to shew himself strong in the behalf of them whose heart is perfect toward him. — 2 Chronicles 16:9 KJV")
   D4 --> E4[Skin]
   E4 --> F4[Gesture]
   F4 --> G4[Icon]
@@ -147,6 +149,11 @@ graph TD
       const current = body.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       body.setAttribute('data-theme', next);
+    }
+    
+    function popup(message) {
+      alert(message);
+      return false;
     }
   </script>
 </body>
