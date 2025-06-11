@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <title>Signal Noise Rotated Stack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌀 Signal Noise Rotated Stack</title>
+
+  <!-- Mermaid.js with fallback plan -->
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
     
-    // Define the popup function before initializing mermaid
+    // Popup function to use with click calls
     window.popup = function(message) {
       alert(message);
       return false;
     };
-    
-    mermaid.initialize({ 
+
+    // Mermaid initialization
+    mermaid.initialize({
       startOnLoad: true,
-      securityLevel: 'loose' // This allows callback functions
+      securityLevel: 'loose'
     });
   </script>
+
   <style>
     :root {
       --bg: #111;
@@ -35,21 +40,22 @@
     }
 
     body {
+      margin: 0;
+      padding: 2rem;
       background-color: var(--bg);
       color: var(--fg);
       font-family: 'Segoe UI', sans-serif;
-      padding: 2rem;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     h1 {
       text-align: center;
       font-size: 2rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .toggle-btn {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       right: 1rem;
       background: var(--accent);
@@ -58,8 +64,8 @@
       padding: 0.5rem 1rem;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s;
+      border-radius: 6px;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .toggle-btn:hover {
@@ -68,17 +74,35 @@
     }
 
     .mermaid {
-      margin: 0 auto;
       max-width: 1000px;
-      background-color: var(--node-bg);
+      margin: 0 auto;
+      background: var(--node-bg);
       padding: 1rem;
       border-radius: 10px;
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--fg);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
-<body data-theme="dark">
-  <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+
+<body>
+  <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">Toggle Theme</button>
+
   <h1>🌀 Noise Signal Stacks</h1>
 
   <div class="mermaid">
@@ -87,9 +111,9 @@ graph TD
   %% Column 1
   A1[.md → 🦴 Molecular] --> B1[Synaptic] 
   click A1 href "https://abikesa.github.io/dashboard/" _blank
-  click B1 call popup("In a fine frenzy rolling to and fro throughout the whole earth. — 2 Corinthians 16: 9 KJV & Midsummer Nights Dream Mashup")
-  B1 --> C1[🌿  Fractal]
-   click C1 href "./snow-storm.jpeg" _blank
+  click B1 call popup("In a fine frenzy rolling to and fro throughout the whole earth. — 2 Chronicles 16:9 & Midsummer Mashup")
+  B1 --> C1[🌿 Fractal]
+  click C1 href="./snow-storm.jpeg" _blank
   C1 --> D1[🪞 Distinctions]
   D1 --> E1[Genetic]
   E1 --> F1[Epigenetic]
@@ -101,7 +125,7 @@ graph TD
   A2[.yml → ⚙️ Anatomical] --> B2[Axonal]
   B2 --> C2[🛠 GitHub]
   C2 --> D2[👁 Observed]
-  click D2 href "https://www.gutenberg.org/files/1514/1514-h/1514-h.htm" _blank
+  click D2 href="https://www.gutenberg.org/files/1514/1514-h/1514-h.htm" _blank
   D2 --> E2[Cell Type]
   E2 --> F2[Tissue]
   F2 --> G2[Organ]
@@ -110,11 +134,11 @@ graph TD
 
   %% Column 3
   A3[.py → 💪🏾 Physiological] --> B3[Sensorimotor]
-  click B3 href "./ukusoma.html" _blank
+  click B3 href="./ukusoma.html" _blank
   B3 --> C3[🤝 Peers-Clients]
-  click C3 href "https://mc.manuscriptcentral.com/cltx" _blank
+  click C3 href="https://mc.manuscriptcentral.com/cltx" _blank
   C3 --> D3[✅ Admissible]
-  click D3 href "https://abikesa.github.io/grounding/" _blank
+  click D3 href="https://abikesa.github.io/grounding/" _blank
   D3 --> E3[Reflex]
   E3 --> F3[Homeostasis]
   F3 --> G3[Feedback]
@@ -123,10 +147,10 @@ graph TD
 
   %% Column 4
   A4[.html → 🧠 Integument] --> B4[Networked]
-  click B4 href "./neural.html" _blank
+  click B4 href="./neural.html" _blank
   B4 --> C4[🏢 Ukubona]
   C4 --> D4[🔤 Unambiguously]
-  click D4 call popup("And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me. — Matthew 25:40 KJV")
+  click D4 call popup("Inasmuch as ye have done it unto one of the least of these… — Matthew 25:40")
   D4 --> E4[Skin]
   E4 --> F4[Gesture]
   F4 --> G4[Icon]
@@ -135,32 +159,35 @@ graph TD
 
   %% Column 5
   A5[.app → 🎭 Act] --> B5[Behavioral]
-  click A5 href "./posture-for-what.html" _blank
-  click B5 call popup("Herein thou hast done foolishly: therefore from henceforth thou shalt have wars. — 2 Chronicles 16:9 KJV")
+  click A5 href="./posture-for-what.html" _blank
+  click B5 call popup("Herein thou hast done foolishly: therefore from henceforth thou shalt have wars. — 2 Chronicles 16:9")
   B5 --> C5[📱 App]
   C5 --> D5[💡 Concepts]
-  click D5 href "./ukb/token/d1bk2x/" _blank
+  click D5 href="./ukb/token/d1bk2x/" _blank
   D5 --> E5[UI/UX]
-  click E5 href "https://abikesa.github.io/ui-ux/" _blank
+  click E5 href="https://abikesa.github.io/ui-ux/" _blank
   E5 --> F5[Habitual]
   F5 --> G5[Intentional]
-  click G5 href "https://www.linkedin.com/in/dr-sarah-kayongo-579b6637" _blank
+  click G5 href="https://www.linkedin.com/in/dr-sarah-kayongo-579b6637" _blank
   G5 --> H5[Cooperative]
   H5 --> I5[Emergent]
   </div>
 
-<div style="text-align: center; margin-top: 2rem; font-size: 0.8rem; color: var(--fg);">
-  <a href="#" onclick="alert('For the eyes of the LORD run to and fro throughout the whole earth, to shew himself strong in the behalf of them whose heart is perfect toward him. — 2 Chronicles 16:9 KJV'); return false;" style="color: var(--accent); text-decoration: none; cursor: pointer;">
-    2 Chronicles 16:9
-  </a>
-</div>
+  <noscript>
+    <p style="color: var(--fg); text-align: center;">JavaScript must be enabled to view this spiral diagram.</p>
+  </noscript>
+
+  <footer>
+    <a href="#" onclick="alert('For the eyes of the LORD run to and fro throughout the whole earth, to shew himself strong in the behalf of them whose heart is perfect toward him. — 2 Chronicles 16:9'); return false;">
+      2 Chronicles 16:9
+    </a>
+  </footer>
 
   <script>
     function toggleTheme() {
-      const body = document.body;
-      const current = body.getAttribute('data-theme');
+      const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', next);
+      document.documentElement.setAttribute('data-theme', next);
     }
   </script>
 </body>
