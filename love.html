@@ -5,7 +5,17 @@
   <title>Signal Noise Rotated Stack</title>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
+    
+    // Define the popup function before initializing mermaid
+    window.popup = function(message) {
+      alert(message);
+      return false;
+    };
+    
+    mermaid.initialize({ 
+      startOnLoad: true,
+      securityLevel: 'loose' // This allows callback functions
+    });
   </script>
   <style>
     :root {
@@ -115,7 +125,7 @@ graph TD
   click B4 href "./neural.html" _blank
   B4 --> C4[🏢 Ukubona]
   C4 --> D4[🔤 Unambiguously]
-  click D4 call popup("And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me. — Matthiew 25:40 KJV")
+  click D4 call popup("And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me. — Matthew 25:40 KJV")
   D4 --> E4[Skin]
   E4 --> F4[Gesture]
   F4 --> G4[Icon]
@@ -149,11 +159,6 @@ graph TD
       const current = body.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       body.setAttribute('data-theme', next);
-    }
-    
-    function popup(message) {
-      alert(message);
-      return false;
     }
   </script>
 </body>
