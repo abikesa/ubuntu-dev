@@ -129,8 +129,8 @@ graph TD
   G2 --> H2[System]
   H2 --> I2[Body Map]
 
-  click C2 href "./github.html" _blank
-  click D2 href "https://www.gutenberg.org/files/1514/1514-h/1514-h.htm" _blank
+  click C2 href="./github.html" _blank
+  click D2 href="https://www.gutenberg.org/files/1514/1514-h/1514-h.htm" _blank
 
   %% Column 3
   A3[.py → 💪🏾 Physiological] --> B3[Sensorimotor]
@@ -142,13 +142,12 @@ graph TD
   G3 --> H3[Neurohumoral]
   H3 --> I3[Cybernetic]
 
-  click B3 href "./ukusoma.html" _blank
-  click C3 href "https://mc.manuscriptcentral.com/cltx" _blank
-  click D3 href "https://abikesa.github.io/grounding/" _blank
-  click G3 href "./claritas.html" _blank
-  click F3 href "https://www.gutenberg.org/files/61/61-h/61-h.htm" _blank
-  click E3 href "./heresy.html" _blank
-
+  click B3 href="./ukusoma.html" _blank
+  click C3 href="https://mc.manuscriptcentral.com/cltx" _blank
+  click D3 href="https://abikesa.github.io/grounding/" _blank
+  click G3 href="./claritas.html" _blank
+  click F3 href="https://www.gutenberg.org/files/61/61-h/61-h.htm" _blank
+  click E3 href="./heresy.html" _blank
 
   %% Column 4
   A4[.html → 🧠 Integument] --> B4[Networked]
@@ -160,9 +159,9 @@ graph TD
   G4 --> H4[Layout]
   H4 --> I4[Interaction Grammar]
 
-  click B4 href "./neural.html" _blank
+  click B4 href="./neural.html" _blank
   click D4 call popup("Inasmuch as ye have done it unto one of the least of these… — Matthew 25:40")
-  click E4 href "./skin-rug.html" _blank
+  click E4 href="./skin-rug.html" _blank
 
   %% Column 5
   A5[.app → 🎭 Act] --> B5[Behavioral]
@@ -174,22 +173,20 @@ graph TD
   G5 --> H5[Cooperative]
   H5 --> I5[Emergent]
 
-  click A5 href "./posture-for-what.html" _blank
+  click A5 href="./posture-for-what.html" _blank
   click B5 call popup("Herein thou hast done foolishly: therefore from henceforth thou shalt have wars. — 2 Chronicles 16:9")
-  click C5 href "./generative.html" _blank
-  click D5 href "./ukb/token/d1bk2x/" _blank
-  click E5 href "https://abikesa.github.io/ui-ux/" _blank
-  click G5 href "https://www.youtube.com/watch?v=44uC12g9ZVk&t=1032s" _blank
-  </div>
-<div style="position: absolute; top: 420px; left: 90%; cursor: pointer;"
-     onmouseenter="showYouTubePreview('https://www.youtube.com/embed/44uC12g9ZVk')"
-     onmouseleave="hideYouTubePreview()">
-  <span style="font-size: 1.5rem;">📺</span>
-</div>
+  click C5 href="./generative.html" _blank
+  click D5 href="./ukb/token/d1bk2x/" _blank
+  click E5 href="https://abikesa.github.io/ui-ux/" _blank
+  click G5 href="javascript:void(0)" _self
 
-  <noscript>
-    <p style="text-align: center; color: var(--fg);">JavaScript is required to render the diagram.</p>
-  </noscript>
+  </div>
+
+  <div style="position: absolute; top: 420px; left: 90%; cursor: pointer;"
+       onmouseenter="showYouTubePreview('https://www.youtube.com/embed/44uC12g9ZVk')"
+       onmouseleave="hideYouTubePreview()">
+    <span style="font-size: 1.5rem;">📺</span>
+  </div>
 
   <footer>
     <a href="#" onclick="alert('For the eyes of the LORD run to and fro throughout the whole earth… — 2 Chronicles 16:9'); return false;">
@@ -203,24 +200,59 @@ graph TD
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
     }
+
     function showYouTubePreview(videoUrl) {
-  const preview = document.getElementById("yt-preview");
-  const iframe = preview.querySelector("iframe");
-  iframe.src = videoUrl + "?autoplay=1&mute=1";
-  preview.style.display = "block";
-}
+      const preview = document.getElementById("yt-preview");
+      const iframe = preview.querySelector("iframe");
+      iframe.src = videoUrl + "?autoplay=1&mute=1";
+      preview.style.display = "block";
+    }
 
-function hideYouTubePreview() {
-  const preview = document.getElementById("yt-preview");
-  const iframe = preview.querySelector("iframe");
-  iframe.src = "";
-  preview.style.display = "none";
-}
+    function hideYouTubePreview() {
+      const preview = document.getElementById("yt-preview");
+      const iframe = preview.querySelector("iframe");
+      iframe.src = "";
+      preview.style.display = "none";
+    }
 
+    function showPreviewG5() {
+      const preview = document.getElementById("yt-preview");
+      const iframe = preview.querySelector("iframe");
+      iframe.src = "https://www.youtube.com/embed/44uC12g9ZVk?start=1032&autoplay=1&mute=1";
+      preview.style.display = "block";
+
+      // Optional auto-hide
+      setTimeout(() => {
+        preview.style.display = "none";
+        iframe.src = "";
+      }, 15000);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+  const gNodes = document.querySelectorAll("g");
+
+  gNodes.forEach(g => {
+    const title = g.querySelector("title");
+    if (title && title.textContent.trim() === "G5") {
+      g.style.cursor = "pointer";
+      g.addEventListener("click", () => {
+        const preview = document.getElementById("yt-preview");
+        const iframe = preview.querySelector("iframe");
+        iframe.src = "https://www.youtube.com/embed/44uC12g9ZVk?start=1032&autoplay=1&mute=1";
+        preview.style.display = "block";
+        setTimeout(() => {
+          preview.style.display = "none";
+          iframe.src = "";
+        }, 15000);
+      });
+    }
+  });
+});
   </script>
-  <div id="yt-preview" style="display:none; position:fixed; bottom:1rem; right:1rem; z-index:1000; background:#000; border:2px solid var(--accent); border-radius:8px;">
-  <iframe width="300" height="170" src="" frameborder="0" allowfullscreen></iframe>
-</div>
 
+  <div id="yt-preview" style="display:none; position:fixed; bottom:1rem; right:1rem; z-index:1000; background:#000; border:2px solid var(--accent); border-radius:8px;">
+    <div style="text-align:right; color:var(--accent); padding:0.2rem 0.5rem; cursor:pointer;" onclick="hideYouTubePreview()">✖</div>
+    <iframe width="300" height="170" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
 </body>
 </html>
+
