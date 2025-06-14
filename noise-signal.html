@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Emergence Stack</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0e4b99 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4ecdc4;
+            margin-bottom: 3rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stack-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .level {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .level:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .level-tactical {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 107, 107, 0.05));
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.2);
+        }
+
+        .level-informational {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(78, 205, 196, 0.05));
+            box-shadow: 0 8px 32px rgba(78, 205, 196, 0.2);
+        }
+
+        .level-strategic {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 193, 7, 0.1));
+            box-shadow: 0 12px 40px rgba(255, 193, 7, 0.3);
+            border: 2px solid rgba(255, 193, 7, 0.5);
+            transform: scale(1.05);
+        }
+
+        .level-operational {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(138, 43, 226, 0.05));
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.2);
+        }
+
+        .level-existential {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 212, 255, 0.05));
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+        }
+
+        .level-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 2rem;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .level-info {
+            flex: 1;
+        }
+
+        .level-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .analogy {
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.7;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .snr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            min-width: 200px;
+        }
+
+        .snr-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .snr-bar {
+            width: 150px;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .snr-noise, .snr-signal {
+            height: 100%;
+            transition: width 1s ease;
+            position: absolute;
+            top: 0;
+        }
+
+        .snr-noise {
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+            left: 0;
+        }
+
+        .snr-signal {
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            right: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particle-flow 8s linear infinite;
+        }
+
+        .connection-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            z-index: -1;
+        }
+
+        .heresy-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes particle-flow {
+            0% { 
+                transform: translateY(-100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        .level:nth-child(1) .emoji { animation-delay: 0s; }
+        .level:nth-child(2) .emoji { animation-delay: 0.5s; }
+        .level:nth-child(3) .emoji { animation-delay: 1s; }
+        .level:nth-child(4) .emoji { animation-delay: 1.5s; }
+        .level:nth-child(5) .emoji { animation-delay: 2s; }
+
+        @media (max-width: 768px) {
+            .level-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .snr-container {
+                min-width: auto;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 7s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 8s;"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">The Emergence Stack</h1>
+        <p class="subtitle">From Chaos to Order: The Phase Transitions of Collective Intelligence</p>
+        
+        <div class="connection-line"></div>
+        
+        <div class="stack-container">
+            <div class="level level-tactical">
+                <div class="level-content">
+                    <div class="emoji">🌊</div>
+                    <div class="level-info">
+                        <div class="level-title">Tactical / Project-Commit</div>
+                        <div class="level-subtitle">Pure Exploration</div>
+                        <div class="analogy">Individual birds testing flight paths</div>
+                    </div>
+                    <div class="snr-container">
+                        <div class="snr-label">95/5</div>
+                        <div class="snr-bar">
+                            <div class="snr-noise" style="width: 95%;"></div>
+                            <div class="snr-signal" style="width: 5%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level level-informational">
+                <div class="level-content">
+                    <div class="emoji">📋</div>
+                    <div class="level-info">
+                        <div class="level-title">Informational / Repo-Pull</div>
+                        <div class="level-subtitle">Pattern Recognition</div>
+                        <div class="analogy">Ants laying pheromone trails</div>
+                    </div>
+                    <div class="snr-container">
+                        <div class="snr-label">80/20</div>
+                        <div class="snr-bar">
+                            <div class="snr-noise" style="width: 80%;"></div>
+                            <div class="snr-signal" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level level-strategic">
+                <div class="heresy-pulse"></div>
+                <div class="level-content">
+                    <div class="emoji">🌀</div>
+                    <div class="level-info">
+                        <div class="level-title">Strategic / Fork-Heresy</div>
+                        <div class="level-subtitle">Phase Transition</div>
+                        <div class="analogy">The moment the murmuration decides</div>
+                    </div>
+                    <div class="snr-container">
+                        <div class="snr-label">50/50</div>
+                        <div class="snr-bar">
+                            <div class="snr-noise" style="width: 50%;"></div>
+                            <div class="snr-signal" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level level-operational">
+                <div class="level-content">
+                    <div class="emoji">🔁</div>
+                    <div class="level-info">
+                        <div class="level-title">Operational / Branch-Merge</div>
+                        <div class="level-subtitle">Collective Coordination</div>
+                        <div class="analogy">Swarm following optimal path</div>
+                    </div>
+                    <div class="snr-container">
+                        <div class="snr-label">20/80</div>
+                        <div class="snr-bar">
+                            <div class="snr-noise" style="width: 20%;"></div>
+                            <div class="snr-signal" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level level-existential">
+                <div class="level-content">
+                    <div class="emoji">♾️</div>
+                    <div class="level-info">
+                        <div class="level-title">Existential / Recursion-Loop</div>
+                        <div class="level-subtitle">Pure Signal</div>
+                        <div class="analogy">Perfect flocking behavior</div>
+                    </div>
+                    <div class="snr-container">
+                        <div class="snr-label">5/95</div>
+                        <div class="snr-bar">
+                            <div class="snr-noise" style="width: 5%;"></div>
+                            <div class="snr-signal" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.level').forEach(level => {
+            level.addEventListener('mouseenter', () => {
+                level.style.transform = 'translateX(10px) scale(1.02)';
+            });
+            
+            level.addEventListener('mouseleave', () => {
+                if (!level.classList.contains('level-strategic')) {
+                    level.style.transform = 'translateX(0px) scale(1)';
+                } else {
+                    level.style.transform = 'scale(1.05)';
+                }
+            });
+        });
+
+        // Animate SNR bars on load
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.snr-noise, .snr-signal');
+            bars.forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.transition = 'width 2s ease';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
