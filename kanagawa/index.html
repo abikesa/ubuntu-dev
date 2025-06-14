@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔁 The Return</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at center, #f0f8ff 0%, #e0eafc 100%);
+      font-family: 'Georgia', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .spiral {
+      font-size: 8rem;
+      animation: spin 20s linear infinite;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .description {
+      font-size: 1.2rem;
+      color: #444;
+      text-align: center;
+      max-width: 600px;
+      padding: 0 1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .state {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: #666;
+      font-weight: bold;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    /* Fade transition for content changes */
+    .fade-transition {
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade-out {
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spiral fade-transition" id="emoji">🌊</div>
+  <h1 class="fade-transition" id="title">The Wave</h1>
+  <div class="description fade-transition" id="desc">
+    Overwhelming force, pattern beyond control.
+  </div>
+  <div class="state" id="state-counter">1 of 5</div>
+
+  <div class="footer">Kanagawa Inversion Stack — 🔁 The Return</div>
+
+  <script>
+    const states = [
+      ["🌊", "The Wave", "Overwhelming force, pattern beyond control."],
+      ["🛶", "The Vessel", "Fragile human construct, built to navigate chaos."],
+      ["🙇", "The Supplicant", "Humility before scale, surrender without defeat."],
+      ["🫧", "The Dissolution", "Dispersal, ego loss, evaporation of form."],
+      ["🔁", "The Return", "Recursion, renewal, eternal recurrence."]
+    ];
+
+    let index = 0;
+
+    function updateState() {
+      // Add fade effect
+      const elements = document.querySelectorAll('.fade-transition');
+      elements.forEach(el => el.classList.add('fade-out'));
+      
+      setTimeout(() => {
+        const [emoji, title, desc] = states[index];
+        document.getElementById("emoji").textContent = emoji;
+        document.getElementById("title").textContent = title;
+        document.getElementById("desc").textContent = desc;
+        document.getElementById("state-counter").textContent = `${index + 1} of 5`;
+        
+        // Remove fade effect
+        elements.forEach(el => el.classList.remove('fade-out'));
+        
+        index = (index + 1) % states.length;
+      }, 250);
+    }
+
+    // Start the cycle
+    setInterval(updateState, 4000); // Cycle every 4 seconds
+    
+    // Optional: Click to advance manually
+    document.body.addEventListener('click', updateState);
+  </script>
+
+</body>
+</html>
+
+<!-- https://claude.ai/public/artifacts/1faf1dec-dfa1-4259-9bb1-e84fbd1cb8f8 -->
