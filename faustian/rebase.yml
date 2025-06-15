@@ -1,0 +1,16 @@
+neurocosmic_fork:
+  init:
+    context: "Faculty at Johns Hopkins"
+    role: "Neighbor"
+  commit:
+    context: "Signed HR contract"
+    role: "Self"
+  fork:
+    context: "Established Ukubona LLC as vendor"
+    role: "Faustian fork"
+  branching:
+    context: "Variants via interns, clients, contracts"
+    role: "Living framework"
+  merge_rebase:
+    context: "Merge with or bypass institutions"
+    role: "Recursive sovereign"
