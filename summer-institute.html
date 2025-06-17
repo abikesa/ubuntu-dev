@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signal ↔ Code ↔ Body Spiral</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #0f0f0f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .spiral-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .spiral-node {
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 1rem;
+      padding: 1rem;
+      transition: transform 0.3s;
+    }
+    .spiral-node:hover {
+      transform: scale(1.05);
+      background-color: #222;
+    }
+    .emoji {
+      font-size: 2rem;
+    }
+    .label {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+    .sub {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔁 Signal ↔ Code ↔ Body ↔ Space ↔ Time</h1>
+  <div class="spiral-container">
+    <div class="spiral-node">
+      <div class="emoji">🌊</div>
+      <div class="label">c(os), .git, Genome 🧬</div>
+      <div class="sub">init · Zoom</div>
+    </div>
+    <div class="spiral-node">
+      <div class="emoji">❤️</div>
+      <div class="label">.dta, .yml, Epigenome</div>
+      <div class="sub">commit · Host</div>
+    </div>
+    <div class="spiral-node">
+      <div class="emoji">🌀</div>
+      <div class="label">$url, .py, Transcriptome</div>
+      <div class="sub">fork · Share</div>
+    </div>
+    <div class="spiral-node">
+      <div class="emoji">🐬</div>
+      <div class="label">.png, .html, Proteome</div>
+      <div class="sub">branch · Room</div>
+    </div>
+    <div class="spiral-node">
+      <div class="emoji">🔁</div>
+      <div class="label">flask-app, Metabolome</div>
+      <div class="sub">merge · Back</div>
+    </div>
+  </div>
+</body>
+</html>
+
