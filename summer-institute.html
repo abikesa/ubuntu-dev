@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signal ↔ Code ↔ Body Spiral</title>
   <style>
     body {
@@ -16,6 +16,11 @@
       min-height: 100vh;
       margin: 0;
     }
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+
     .spiral-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -23,53 +28,104 @@
       max-width: 90vw;
       text-align: center;
     }
+
     .spiral-node {
+      position: relative;
       background: #1e1e1e;
       border: 1px solid #444;
       border-radius: 1rem;
       padding: 1rem;
-      transition: transform 0.3s;
+      transition: transform 0.3s, background-color 0.3s;
+      overflow: hidden;
     }
+
     .spiral-node:hover {
       transform: scale(1.05);
       background-color: #222;
     }
+
     .emoji {
       font-size: 2rem;
     }
+
     .label {
       margin-top: 0.5rem;
       font-weight: bold;
     }
+
     .sub {
       font-size: 0.8rem;
       color: #aaa;
+    }
+
+    .youtube-hover {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: top 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .spiral-node:hover .youtube-hover {
+      top: 105%;
+      height: 200px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .youtube-hover iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0.5rem;
     }
   </style>
 </head>
 <body>
   <h1>🔁 Signal ↔ Code ↔ Body ↔ Space ↔ Time</h1>
+
   <div class="spiral-container">
+    <!-- 🌊 -->
     <div class="spiral-node">
       <div class="emoji">🌊</div>
       <div class="label">c(os), .git, Genome 🧬</div>
       <div class="sub">init · Zoom</div>
+      <div class="youtube-hover">
+        <iframe
+          src="https://www.youtube.com/embed/NLZRYQMLDW4?controls=1"
+          title="Genome"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
+
+    <!-- ❤️ -->
     <div class="spiral-node">
       <div class="emoji">❤️</div>
       <div class="label">.dta, .yml, Epigenome</div>
       <div class="sub">commit · Host</div>
     </div>
+
+    <!-- 🌀 -->
     <div class="spiral-node">
       <div class="emoji">🌀</div>
       <div class="label">$url, .py, Transcriptome</div>
       <div class="sub">fork · Share</div>
     </div>
+
+    <!-- 🐬 -->
     <div class="spiral-node">
       <div class="emoji">🐬</div>
       <div class="label">.png, .html, Proteome</div>
       <div class="sub">branch · Room</div>
     </div>
+
+    <!-- 🔁 -->
     <div class="spiral-node">
       <div class="emoji">🔁</div>
       <div class="label">flask-app, Metabolome</div>
@@ -78,4 +134,3 @@
   </div>
 </body>
 </html>
-
